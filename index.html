@@ -1,61 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="./weather.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
-    <div class="text-center mt-3 p-4">
-        <h1 >Weather Report</h1>
-    </div>   
-    <form action="">
-        <div class="container mt-5 p-5 text-center form-control" >
-            <input type="text" class="form-control" name="" id="foreCast" placeholder="enter the city"><br><br>
-            <button type="button" class="btn btn-success" onclick="weatherReport()">search</button><br><br>
-            <div id="result"></div>
-        
-            <div id="cel"></div>
-            <div id="des"></div>
-            <div id="temp"></div>
-            <div id="hum"></div>
 
-        </div>
-    </form>
+<body style="background-image: url(./CLIMATEPIC2.jpg);background-size: cover;background-attachment: fixed;background-repeat: no-repeat; margin: 0;">
+    <div class="text-center mt-3 p-4">
+        <h1 style="color: aqua;">WEATHER <span style="color: blue;">REPORT</span></h1>
+        <form class="bg- border p-3" action="">
+            <div class=" mt-5 p-5 container text-center  "
+                style="background-image: url(./CLIMATEPIC.jpg);background-repeat: no-repeat;background-size: cover;background-attachment: fixed; box-shadow:  10px 10px 5px 12px lightblue;;">
+                <input type="text" class="form-control" name="" id="foreCast" placeholder="Enter The City"><br><br>
+                <button type="button" class="btn btn-success" style="color: whitesmoke;" onclick="weatherReport()">SEARCH</button><br><br>
+                <div id="result"
+                    style="color:aqua; height: max-content; font-family: Verdana, Geneva, Tahoma, sans-serif; font-style: oblique;">
+
+                </div>
+
+
+
+            </div>
+        </form>
+    </div>
+
 </body>
 <script>
-    function weatherReport(){
-        cityName=foreCast.value
+    function weatherReport() {
+        cityName = foreCast.value
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=b41ec3be35c7dac8aabbc21ba253137a`)
-            .then(data=>data.json()).then(cData=>displayData(cData))
+            .then(data => data.json()).then(cData => displayData(cData))
 
-        function displayData(dataArray){
-        name=dataArray.name
-        weather=dataArray.weather[0].description
-        temp=dataArray.main.temp
-humidity=dataArray.main.humidity
-        
-        result.innerHTML=`<div>
+        function displayData(dataArray) {
+            name = dataArray.name
+            weather = dataArray.weather[0].description
+            temp = dataArray.main.temp
+            humidity = dataArray.main.humidity
+
+            result.innerHTML = `<div>
+           
+            <h3 class="text-light" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-style: oblique;">Place </h3>
+            <i class="fa-solid fa-location-dot  fa-2x"></i>
             <h3>${name}</h3>
-            </div>`
-        cel.innerHTML=`
-        <div>
+            <h3 class="text-light" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-style: oblique;">Temperature</h3>
+            <i class="fa-solid fa-cloud-sun  fa-2x"></i>
+
             <h3>${temp}°C</h3>
+            <h3 class="text-light" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-style: oblique;">Weather</h3>
+            <i class="fa-solid fa-cloud  fa-2x"></i>
+            <h3>${weather}</h3>
+            <h3 class="text-light" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-style: oblique;">Humidity</h3>
+            <i class="fa-regular fa-snowflake  fa-2x"></i>
+
+            <h3>${humidity}%</h3>
+
             </div>`
 
-        des.innerHTML=`<div>
-            <h3>${weather}</h3>
-            </div>` 
-
-            hum.innerHTML=`<div>
-            <h3>${humidity}</h3>
-            </div>` 
-
-
+        }
     }
-}
-</script> 
+</script>
+
 </html>
